@@ -1,6 +1,6 @@
 quarkus:
   log:
-    level: DEBUG
+    level: INFO
   datasource:
     db-kind: "postgresql"
     username: "admin"

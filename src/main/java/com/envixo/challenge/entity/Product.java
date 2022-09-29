@@ -17,7 +17,7 @@ public class Product {
     @Column(name = "description", columnDefinition = "varchar(255) not null")
     private String description;
 
-    @Column(name = "img_path", columnDefinition = "varchar(1024)")
+    @Column(name = "img_path", columnDefinition = "text")
     private String path;
 
     @Column(name = "status", columnDefinition = "boolean not null")

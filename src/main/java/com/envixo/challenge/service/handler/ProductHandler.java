@@ -5,6 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import javax.enterprise.context.ApplicationScoped;
+
+@ApplicationScoped
 public class ProductHandler {
 
     public JsonObject parseToJson(Product product) {
@@ -12,7 +15,7 @@ public class ProductHandler {
         productJson.addProperty("id", product.getId());
         productJson.addProperty("title", product.getTitle());
         productJson.addProperty("description", product.getDescription());
-        productJson.addProperty("img_path", product.getPath());
+        productJson.addProperty("path", product.getPath());
         productJson.addProperty("status", product.getStatus());
         productJson.addProperty("category", product.getCategory());
         productJson.addProperty("tag", product.getTag());
@@ -28,12 +31,6 @@ public class ProductHandler {
         return product;
     }
 
-    public JsonObject parseErrorMessage(String message, int code) {
-        JsonObject error = new JsonObject();
-        error.addProperty("message", message);
-        error.addProperty("code", code);
-        return error;
-    }
 }
 
 
