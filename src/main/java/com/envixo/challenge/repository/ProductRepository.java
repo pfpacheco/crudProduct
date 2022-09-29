@@ -6,6 +6,7 @@ import org.hibernate.QueryException;
 import org.hibernate.TransactionException;
 import org.jboss.logging.Logger;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -17,6 +18,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class ProductRepository implements IProductRepository {
 
     private static final Logger LOG = Logger.getLogger(ProductRepository.class);
@@ -26,9 +28,9 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
-    public Product create(Product product) {
+    public Product save(Product product) {
         try {
-            entityManager.merge(product);
+            product = entityManager.merge(product);
         } catch (PersistenceException e) {
             LOG.error("Error persisting the product", e);
         } finally {
@@ -87,7 +89,7 @@ public class ProductRepository implements IProductRepository {
         List<Product> productList = new ArrayList<>();
         try {
             CriteriaQuery<Product> criteriaQuery = entityManager.getCriteriaBuilder().createQuery(Product.class);
-            productList = entityManager.createQuery(criteriaQuery.select((criteriaQuery.from(Product.class)))).getResultList();
+            productList = entityManager.createQuery(criteriaQuery.select(criteriaQuery.from(Product.class))).getResultList();
         } catch (QueryException | EntityNotFoundException e) {
             LOG.error("Could not retrieve a list of products", e);
         }
