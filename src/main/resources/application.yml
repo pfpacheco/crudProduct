@@ -1,0 +1,14 @@
+quarkus:
+  log:
+    level: DEBUG
+  datasource:
+    db-kind: "postgresql"
+    username: "admin"
+    password: "7UQxgBfWYsvprniok4fc"
+    jdbc:
+      driver: "org.postgresql.Driver"
+      url: "jdbc:postgresql://localhost:5432/product_db"
+      max-size: 20
+  hibernate-orm:
+    database:
+      generation: "drop-and-create"
